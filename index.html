@@ -1,16 +1,186 @@
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<title>Flora — Gestão de Plantas</title>
-<link rel="stylesheet" href="src/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#244c38">
+  <meta name="description"
+        content="FloraAura - Catálogo e gestão de plantas decorativas e de jardim.">
+
+  <title>FloraAura | Gestão de Plantas</title>
+
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="module" src="src/js/app.js"></script>
 </head>
+
 <body>
- 
-    <div id="app"></div>
- 
-    <script src="src/js/router.js"></script>
-<script src="src/js/app.js"></script>
+  <div class="app-layout">
+
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio" aria-label="FloraAura - Início">
+        <span class="brand-icon">✿</span>
+        <span>FloraAura<small>O teu jardim digital</small></span>
+      </a>
+
+      <nav class="navigation" aria-label="Navegação principal">
+        <a href="#inicio" class="nav-link active" data-page="inicio">
+          <span>⌂</span> Painel
+        </a>
+        <a href="#catalogo" class="nav-link" data-page="catalogo">
+          <span>❀</span> Catálogo de plantas
+        </a>
+        <a href="#minhas-plantas" class="nav-link" data-page="minhas-plantas">
+          <span>♧</span> As minhas plantas
+        </a>
+        <a href="#cuidados" class="nav-link" data-page="cuidados">
+          <span>◷</span> Registos de cuidados
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="user-card">
+          <div class="avatar">F</div>
+          <div>
+            <strong>Utilizador Flora
+
+            </strong>
+            <small>Perfil local de demonstração</small>
+          </div>
+        </div>
+        <p class="sidebar-note">Cultiva conhecimento, planta a planta.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button menu-toggle" id="menu-toggle"
+                aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+        <div>
+          <span class="eyebrow">ESPAÇO BOTÂNICO</span>
+          <h1 id="page-title">O teu jardim digital</h1>
+        </div>
+
+        <button class="button button-primary" id="add-plant-btn">
+          <span>＋</span> Adicionar planta
+        </button>
+      </header>
+
+      <section id="page-content" aria-live="polite">
+        <div class="loading">A preparar o teu jardim...</div>
+      </section>
+
+      <footer class="footer">
+        FloraGest · Projeto de Programação · 12.º ano
+      </footer>
+    </main>
+  </div>
+
+  <!-- Janela de criação e edição -->
+  <dialog id="plant-dialog" class="modal">
+    <div class="modal-header">
+      <div>
+        <span class="eyebrow">GESTÃO BOTÂNICA</span>
+        <h2 id="form-title">Adicionar planta</h2>
+      </div>
+      <button class="icon-button" id="close-dialog"
+              type="button" aria-label="Fechar">✕</button>
+    </div>
+
+    <form id="plant-form">
+      <input type="hidden" id="plant-id">
+
+      <label for="common-name">Nome comum *</label>
+      <input id="common-name" name="commonName"
+             required maxlength="100" placeholder="Ex.: Monstera">
+
+      <label for="scientific-name">Nome científico</label>
+      <input id="scientific-name" name="scientificName"
+             maxlength="150" placeholder="Ex.: Monstera deliciosa">
+
+      <div class="form-grid">
+        <div>
+          <label for="category">Categoria *</label>
+          <select id="category" name="category" required>
+            <option value="Interior">Planta de interior</option>
+            <option value="Exterior">Planta de exterior</option>
+            <option value="Ornamental">Ornamental</option>
+            <option value="Jardim">Planta de jardim</option>
+            <option value="Suculenta">Suculenta</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="light">Exposição solar</label>
+          <select id="light" name="light">
+            <option value="Luz indireta">Luz indireta</option>
+            <option value="Sol direto">Sol direto</option>
+            <option value="Meia-sombra">Meia-sombra</option>
+            <option value="Sombra">Sombra</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label for="watering">Frequência de rega</label>
+          <select id="watering" name="watering">
+            <option value="Diária">Diária</option>
+            <option value="A cada 2-3 dias">A cada 2-3 dias</option>
+            <option value="Semanal">Semanal</option>
+            <option value="Quinzenal">Quinzenal</option>
+            <option value="Mensal">Mensal</option>
+            <option value="Quando o solo secar">Quando o solo secar</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="soil">Tipo de solo</label>
+          <input id="soil" name="soil" maxlength="100"
+                 placeholder="Ex.: Solo bem drenado">
+        </div>
+      </div>
+
+      <label for="health">Estado de saúde</label>
+      <select id="health" name="health">
+        <option value="Saudável">Saudável</option>
+        <option value="Atenção">Precisa de atenção</option>
+        <option value="Doente">Doente</option>
+      </select>
+
+      <label for="next-watering">Próxima rega</label>
+      <input id="next-watering" name="nextWatering" type="date">
+
+      <label for="plant-photo">Fotografia da planta</label>
+      <input id="plant-photo" name="photo" type="file"
+             accept="image/*">
+      <small class="field-help">Escolhe uma fotografia do teu dispositivo.</small>
+
+      <label for="notes">Descrição e dicas de cuidados</label>
+      <textarea id="notes" name="notes" rows="3"
+                maxlength="1000"
+                placeholder="Observações, cuidados especiais..."></textarea>
+
+      <div class="modal-actions">
+        <button type="button" class="button button-light"
+                id="cancel-dialog">Cancelar</button>
+        <button type="submit" class="button button-primary">
+          Guardar planta
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Janela de consulta -->
+  <dialog id="detail-dialog" class="modal detail-modal">
+    <div id="detail-content"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
