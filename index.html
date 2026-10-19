@@ -6,12 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="#244c38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="FloraAura">
   <meta name="description"
         content="FloraAura - Catálogo e gestão de plantas decorativas e de jardim.">
 
   <title>FloraAura | Gestão de Plantas</title>
 
-  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="floraaura.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 
@@ -31,6 +35,12 @@
       <button class="button button-primary welcome-continue" id="welcome-continue" type="button">
         Continuar
       </button>
+      <button class="button button-light install-button" id="install-app" type="button" hidden>
+        Instalar FloraAura
+      </button>
+      <p class="install-help" id="install-help" aria-live="polite">
+        Para instalar: no Android, abre o menu do navegador e escolhe “Instalar aplicação”; no iPhone, toca em Partilhar e depois “Adicionar ao ecrã principal”.
+      </p>
       <span class="welcome-flower" aria-hidden="true">❧</span>
     </section>
   </main>

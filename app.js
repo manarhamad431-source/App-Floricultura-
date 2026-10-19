@@ -4,6 +4,8 @@ const appLayout = document.querySelector("#app-layout");
 const loginForm = document.querySelector("#login-form");
 const loginMessage = document.querySelector("#login-message");
 const authSwitch = document.querySelector("#auth-switch");
+const installButton = document.querySelector("#install-app");
+const installHelp = document.querySelector("#install-help");
 const sessionUser = document.querySelector("#session-user");
 const sessionStorageKey = "floraAuraDemoUser";
 const accountsStorageKey = "floraAuraAccountsV1";
@@ -17,6 +19,7 @@ let authMode = "login";
 let currentAccount = null;
 let currentPage = "inicio";
 let toastTimeout;
+let installPrompt = null;
 
 const catalogPlants = [
   { name: "Monstera", scientificName: "Monstera deliciosa", category: "Interior", light: "Luz indireta", watering: "Semanal", icon: "🌿" },
@@ -492,6 +495,33 @@ function signOut() {
 
 authSwitch.addEventListener("click", () => setAuthMode(authMode === "login" ? "register" : "login"));
 document.querySelector("#welcome-continue").addEventListener("click", () => showLogin());
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installPrompt = event;
+  installButton.hidden = false;
+});
+installButton.addEventListener("click", async () => {
+  if (!installPrompt) return;
+  installButton.disabled = true;
+  try {
+    await installPrompt.prompt();
+    const choice = await installPrompt.userChoice;
+    if (choice.outcome === "accepted") {
+      installHelp.textContent = "A instalação da FloraAura foi iniciada.";
+      installButton.hidden = true;
+    }
+  } catch (error) {
+    console.error("Falha ao iniciar a instalação da PWA:", error);
+    installHelp.textContent = "Não foi possível iniciar a instalação. Usa o menu do navegador para instalar a aplicação.";
+  } finally {
+    installPrompt = null;
+    installButton.disabled = false;
+  }
+});
+window.addEventListener("appinstalled", () => {
+  installButton.hidden = true;
+  installHelp.textContent = "FloraAura instalada com sucesso.";
+});
 loginForm.addEventListener("submit", handleAuthSubmit);
 plantForm.addEventListener("submit", savePlant);
 document.querySelector("#add-plant-btn").addEventListener("click", () => openPlantForm());
@@ -573,6 +603,14 @@ pageContent.addEventListener("submit", (event) => {
 document.querySelector("#detail-content").addEventListener("click", (event) => {
   if (event.target.closest('[data-action="close-details"]')) detailDialog.close();
 });
+
+if ("serviceWorker" in navigator && window.isSecureContext) {
+  navigator.serviceWorker.register("./sw.js")
+    .catch((error) => {
+      console.error("Falha ao registar o service worker da FloraAura:", error);
+      installHelp.textContent = "Não foi possível preparar a instalação offline. Abre a aplicação através de HTTPS e tenta novamente.";
+    });
+}
 
 try {
   const savedEmail = sessionStorage.getItem(sessionStorageKey);

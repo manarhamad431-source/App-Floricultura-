@@ -96,6 +96,20 @@ body {
   font-size: 14px;
 }
 
+.install-button {
+  min-height: 50px;
+  margin-left: 8px;
+}
+
+.install-help {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
 .welcome-flower {
   position: absolute;
   z-index: -1;
@@ -1015,6 +1029,11 @@ h3 {
 
   .topbar > .button {
     width: 100%;
+  }
+
+  .install-button {
+    width: 100%;
+    margin: 10px 0 0;
   }
 
   .welcome-banner {
