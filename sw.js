@@ -1,4 +1,4 @@
-const CACHE_NAME = "floraaura-shell-v1";
+const CACHE_NAME = "floraaura-shell-v3";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -8,7 +8,17 @@ const APP_FILES = [
   "./floraaura.svg",
   "./icons/floraaura-192.png",
   "./icons/floraaura-512.png",
-  "./icons/apple-touch-icon.png"
+  "./icons/apple-touch-icon.png",
+  "./assets/plants/monstera.jpg",
+  "./assets/plants/lavender.jpg",
+  "./assets/plants/aloe-vera.jpg",
+  "./assets/plants/peace-lily.jpg",
+  "./assets/plants/rose.jpg",
+  "./assets/plants/orchid.jpg",
+  "./assets/plants/red-rose.jpg",
+  "./assets/plants/tulip.jpg",
+  "./assets/plants/dahlia.jpg",
+  "./assets/plants/daisy.jpg"
 ];
 
 self.addEventListener("install", (event) => {

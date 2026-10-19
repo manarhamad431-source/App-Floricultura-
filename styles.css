@@ -454,6 +454,23 @@ h3 {
   width: 100%;
 }
 
+.catalog-image {
+  cursor: default;
+}
+
+.image-credit {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.image-credit a {
+  color: var(--green-800);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .catalog-card .button:disabled {
   cursor: default;
   transform: none;

@@ -22,12 +22,16 @@ let toastTimeout;
 let installPrompt = null;
 
 const catalogPlants = [
-  { name: "Monstera", scientificName: "Monstera deliciosa", category: "Interior", light: "Luz indireta", watering: "Semanal", icon: "🌿" },
-  { name: "Lavanda", scientificName: "Lavandula angustifolia", category: "Exterior", light: "Sol direto", watering: "Semanal", icon: "🪻" },
-  { name: "Aloe vera", scientificName: "Aloe barbadensis miller", category: "Suculenta", light: "Sol direto", watering: "Quinzenal", icon: "🌵" },
-  { name: "Lírio-da-paz", scientificName: "Spathiphyllum wallisii", category: "Interior", light: "Meia-sombra", watering: "A cada 2-3 dias", icon: "🌱" },
-  { name: "Roseira", scientificName: "Rosa spp.", category: "Jardim", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌹" },
-  { name: "Orquídea", scientificName: "Phalaenopsis", category: "Ornamental", light: "Luz indireta", watering: "Semanal", icon: "🌸" }
+  { name: "Monstera", scientificName: "Monstera deliciosa", category: "Interior", light: "Luz indireta", watering: "Semanal", icon: "🌿", photo: "assets/plants/monstera.jpg", artist: "H. Zell", source: "https://commons.wikimedia.org/wiki/File:Monstera_deliciosa_-_Wilhelma_01.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+  { name: "Lavanda", scientificName: "Lavandula angustifolia", category: "Exterior", light: "Sol direto", watering: "Semanal", icon: "🪻", photo: "assets/plants/lavender.jpg", artist: "Norbert Nagel", source: "https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_lavender_-_Lavendel_-_01.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+  { name: "Aloe vera", scientificName: "Aloe barbadensis miller", category: "Suculenta", light: "Sol direto", watering: "Quinzenal", icon: "🌵", photo: "assets/plants/aloe-vera.jpg", artist: "H. Zell", source: "https://commons.wikimedia.org/wiki/File:Aloe_vera_Lanzarote.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+  { name: "Lírio-da-paz", scientificName: "Spathiphyllum wallisii", category: "Interior", light: "Meia-sombra", watering: "A cada 2-3 dias", icon: "🌱", photo: "assets/plants/peace-lily.jpg", artist: "W.carter", source: "https://commons.wikimedia.org/wiki/File:Peace_lily_-_1_-_cropped.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+  { name: "Roseira", scientificName: "Rosa spp.", category: "Jardim", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌹", photo: "assets/plants/rose.jpg", artist: "Agnes Monkelbaan", source: "https://commons.wikimedia.org/wiki/File:Rosa_%27Rosengr%C3%A4fin_Marie_Henriette%27_(actm).jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+  { name: "Orquídea", scientificName: "Phalaenopsis", category: "Ornamental", light: "Luz indireta", watering: "Semanal", icon: "🌸", photo: "assets/plants/orchid.jpg", artist: "Alvesgaspar", source: "https://commons.wikimedia.org/wiki/File:Phalaenopsis_July_2020-2.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+  { name: "Rosa vermelha", scientificName: "Rosa spp.", category: "Jardim", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌹", photo: "assets/plants/red-rose.jpg", artist: "Timothy A. Gonsalves", source: "https://commons.wikimedia.org/wiki/File:Red_Rose_Flower_IITMandi_Himachal_Aug19_D72_11473.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+  { name: "Tulipa", scientificName: "Tulipa gesneriana", category: "Jardim", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌷", photo: "assets/plants/tulip.jpg", artist: "Igor123121", source: "https://commons.wikimedia.org/wiki/File:Tulipa_gesneriana,_2026,_Poland_(6).jpg", license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/" },
+  { name: "Dália", scientificName: "Dahlia 'Bishop of Auckland'", category: "Ornamental", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌺", photo: "assets/plants/dahlia.jpg", artist: "Dominicus Johannes Bergsma", source: "https://commons.wikimedia.org/wiki/File:Dahlia_%27Bishop_of_Auckland.JPG", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+  { name: "Margarida", scientificName: "Leucanthemum vulgare 'Filigran'", category: "Jardim", light: "Sol direto", watering: "A cada 2-3 dias", icon: "🌼", photo: "assets/plants/daisy.jpg", artist: "Derek Ramsey / Chanticleer Garden", source: "https://commons.wikimedia.org/wiki/File:Leucanthemum_vulgare_%27Filigran%27_Flower_2200px.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" }
 ];
 
 function escapeHTML(value = "") {
@@ -230,6 +234,7 @@ function plantCard(plant, index) {
         <span class="category-tag">${escapeHTML(plant.category)}</span>
         <h3>${escapeHTML(plant.name)}</h3>
         <p class="scientific-name">${escapeHTML(plant.scientificName || "Nome científico não indicado")}</p>
+        ${plant.artist && plant.source && plant.license && plant.licenseUrl ? `<small class="image-credit">Fotografia: <a href="${escapeHTML(plant.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(plant.artist)}</a> · <a href="${escapeHTML(plant.licenseUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(plant.license)}</a></small>` : ""}
         <span class="health-tag ${healthClass(plant.health)}">${escapeHTML(plant.health || "Saudável")}</span>
         <div class="plant-meta">
           <span>☀ ${escapeHTML(plant.light || "Exposição não indicada")}</span>
@@ -291,13 +296,14 @@ function renderCatalog() {
     <div class="section-heading"><div><h2>Catálogo de plantas</h2><p>Explora algumas plantas e adiciona-as ao teu jardim.</p></div></div>
     <div class="plant-grid catalog-grid">${catalogPlants.map((plant, index) => `
       <article class="plant-card catalog-card">
-        <div class="plant-image plant-placeholder" aria-hidden="true">${plant.icon}</div>
+        <img class="plant-image catalog-image" src="${escapeHTML(plant.photo)}" alt="${escapeHTML(plant.name)}" loading="lazy" decoding="async">
         <div class="plant-card-body"><span class="category-tag">${escapeHTML(plant.category)}</span>
           <h3>${escapeHTML(plant.name)}</h3><p class="scientific-name">${escapeHTML(plant.scientificName)}</p>
           <div class="plant-meta"><span>☀ ${escapeHTML(plant.light)}</span><span>◷ Rega ${escapeHTML(plant.watering.toLowerCase())}</span></div>
           <button class="button button-primary" type="button" data-action="add-catalog" data-index="${index}" ${plants.some((owned) => owned.catalogId === index) ? "disabled" : ""}>
             ${plants.some((owned) => owned.catalogId === index) ? "Já está no teu jardim" : "＋ Adicionar ao jardim"}
           </button>
+          <small class="image-credit">Fotografia: <a href="${escapeHTML(plant.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(plant.artist)}</a> · <a href="${escapeHTML(plant.licenseUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(plant.license)}</a></small>
         </div>
       </article>`).join("")}
     </div>`;
@@ -424,7 +430,11 @@ async function savePlant(event) {
       nextWatering: String(data.get("nextWatering")),
       notes: String(data.get("notes")).trim(),
       photo,
-      catalogId: existing?.catalogId ?? null
+      catalogId: existing?.catalogId ?? null,
+      artist: existing?.artist || "",
+      source: existing?.source || "",
+      license: existing?.license || "",
+      licenseUrl: existing?.licenseUrl || ""
     };
     const updated = existing ? plants.map((item) => item.id === id ? plant : item) : [...plants, plant];
     savePlants(updated);
@@ -450,7 +460,7 @@ async function addCatalogPlant(index) {
       soil: "",
       notes: "",
       nextWatering: "",
-      photo: ""
+      photo: sample.photo
     });
     savePlants(plants);
     renderPage(currentPage);
