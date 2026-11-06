@@ -1,4 +1,4 @@
-const CACHE_NAME = "floraaura-shell-v3";
+const CACHE_NAME = "floraaura-shell-v25";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -9,16 +9,33 @@ const APP_FILES = [
   "./icons/floraaura-192.png",
   "./icons/floraaura-512.png",
   "./icons/apple-touch-icon.png",
-  "./assets/plants/monstera.jpg",
-  "./assets/plants/lavender.jpg",
-  "./assets/plants/aloe-vera.jpg",
-  "./assets/plants/peace-lily.jpg",
-  "./assets/plants/rose.jpg",
-  "./assets/plants/orchid.jpg",
-  "./assets/plants/red-rose.jpg",
-  "./assets/plants/tulip.jpg",
-  "./assets/plants/dahlia.jpg",
-  "./assets/plants/daisy.jpg"
+  "./assets/plants/monstera-user.png",
+  "./assets/plants/lavender-user.png",
+  "./assets/plants/aloe-vera-user.png",
+  "./assets/plants/peace-lily-user.png",
+  "./assets/plants/rose-user.png",
+  "./assets/plants/orchid-user.png",
+  "./assets/plants/red-rose-user.png",
+  "./assets/plants/tulip-user.png",
+  "./assets/plants/dahlia-user.png",
+  "./assets/plants/daisy-user.png",
+  "./assets/plants/cato.png",
+  "./assets/plants/jiboia-user.png",
+  "./assets/plants/petunia.png",
+  "./assets/plants/hibisco.png",
+  "./assets/plants/violeta-africana.png",
+  "./assets/plants/gardenia.png",
+  "./assets/plants/camelia.png",
+  "./assets/plants/peonia-user.png",
+  "./assets/plants/girassol.png",
+  "./assets/plants/hortensia.png",
+  "./assets/plants/hera.png",
+  "./assets/plants/crisantemo.png",
+  "./assets/plants/begonia.png",
+  "./assets/plants/calateia.png",
+  "./assets/plants/jasmim.png",
+  "./assets/plants/geranio.png",
+  "./assets/plants/alecrim.png"
 ];
 
 self.addEventListener("install", (event) => {
