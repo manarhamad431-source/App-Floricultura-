@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#315f45"/>
+      <stop offset="1" stop-color="#193b2d"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9d39c"/>
+      <stop offset="1" stop-color="#78a878"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="132" fill="url(#background)"/>
+  <circle cx="256" cy="256" r="177" fill="none" stroke="#ffffff" stroke-opacity=".14" stroke-width="2"/>
+  <path d="M253 356c2-74 9-132 33-193" fill="none" stroke="#f4d28a" stroke-linecap="round" stroke-width="13"/>
+  <path d="M273 265c-61 7-98-24-103-82 56 1 92 30 103 82Z" fill="url(#leaf)"/>
+  <path d="M274 266c3-62 38-101 96-110-4 57-37 94-96 110Z" fill="#d5e5bb"/>
+  <path d="M249 330c-49 2-82-23-94-69 48-5 80 20 94 69Z" fill="#78a878"/>
+  <path d="M264 330c14-46 48-69 96-62-14 45-47 67-96 62Z" fill="url(#leaf)"/>
+  <path d="m272 74 9 22 23 2-18 15 6 22-20-12-20 12 6-22-18-15 23-2 9-22Z" fill="#f1cc7d"/>
+</svg>
